@@ -1,12 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./../css/form.css";
 import { Link } from "react-router-dom";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { HiOutlineInformationCircle } from "react-icons/hi";
+import { AuthContext } from "../providers/AuthProvider";
 
 const Login = () => {
+  const { login, googlePopUpSignIn, githubPopUpSignIn } =
+    useContext(AuthContext);
+
   const formSubmitHandler = (e) => {
     e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    login(email, password)
+      .then((userCredential) => console.log(userCredential))
+      .catch((err) => console.error(err));
+  };
+
+  const handleGooglePopUpLogin = () => {
+    googlePopUpSignIn()
+      .then((result) => console.log(result.user))
+      .catch((err) => console.error(err.message));
+  };
+
+  const handleGithubPopUpLogin = () => {
+    githubPopUpSignIn()
+      .then((result) => console.log(result.user))
+      .catch((err) => console.error(err.message));
   };
 
   return (
@@ -33,16 +56,18 @@ const Login = () => {
               <div className="form-floating mb-3">
                 <input
                   type="email"
+                  name="email"
                   className="form-control"
-                  id="floatingInput"
+                  id="floatingEmail"
                   placeholder="name@example.com"
                   required
                 />
-                <label htmlFor="floatingInput">Email address</label>
+                <label htmlFor="floatingEmail">Email address</label>
               </div>
               <div className="form-floating">
                 <input
                   type="password"
+                  name="password"
                   className="form-control"
                   id="floatingPassword"
                   placeholder="Password"
@@ -97,12 +122,14 @@ const Login = () => {
               <button
                 type="submit"
                 className="github_login_button rounded py-1 px-3 fw-medium w-100"
+                onClick={handleGithubPopUpLogin}
               >
                 <FaGithub></FaGithub> &nbsp; Github
               </button>
               <button
                 type="submit"
                 className="google_login_button rounded py-1 px-3 fw-medium w-100"
+                onClick={handleGooglePopUpLogin}
               >
                 <FaGoogle></FaGoogle> &nbsp; Google
               </button>

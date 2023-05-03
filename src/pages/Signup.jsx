@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import { HiOutlineInformationCircle } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
 
 const Signup = () => {
+  const { createUser, updateUser } = useContext(AuthContext);
+
   const formSubmitHandler = (e) => {
     e.preventDefault();
     const form = e.target;
-    const name = e.name.value;
-    const email = e.email.value;
-    const password = e.password.value;
-    const photo = e.photo.value;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const photo = form.photo.value;
 
     console.log(form, name, email, password, photo);
+    createUser(email, password)
+      .then((userCredential) => console.log(userCredential))
+      .catch((err) => console.error(err));
+    // updateUser(name, photo)
+    //   .then((userCredential) => console.log(userCredential))
+    //   .catch((err) => console.error(err));
   };
 
   return (
@@ -40,22 +49,22 @@ const Signup = () => {
                   type="text"
                   name="name"
                   className="form-control"
-                  id="floatingInput"
-                  placeholder="name@example.com"
+                  id="floatingName"
+                  placeholder="your name"
                   required
                 />
-                <label htmlFor="floatingInput">Name</label>
+                <label htmlFor="floatingName">Name</label>
               </div>
               <div className="form-floating mb-3">
                 <input
                   type="email"
                   name="email"
                   className="form-control"
-                  id="floatingInput"
+                  id="floatingEmail"
                   placeholder="name@example.com"
                   required
                 />
-                <label htmlFor="floatingInput">Email address</label>
+                <label htmlFor="floatingEmail">Email address</label>
               </div>
               <div className="form-floating mb-3">
                 <input
@@ -73,10 +82,10 @@ const Signup = () => {
                   type="text"
                   name="photo"
                   className="form-control"
-                  id="floatingInput"
-                  placeholder="name@example.com"
+                  id="floatingPhoto"
+                  placeholder="https://abcd.com/imageurl"
                 />
-                <label htmlFor="floatingInput">Photo URL</label>
+                <label htmlFor="floatingPhoto">Photo URL</label>
               </div>
               <div className="mb-3 form-check">
                 <input
