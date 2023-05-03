@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React, { createContext, useState } from "react";
 import {
   GithubAuthProvider,
   GoogleAuthProvider,
@@ -20,6 +20,8 @@ const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
@@ -29,6 +31,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const updateUser = (displayName, photoURL) => {
+    console.log(auth.currentUser, displayName, photoURL);
     return updateProfile(auth.currentUser, {
       displayName: displayName,
       photoURL: photoURL,
@@ -44,6 +47,8 @@ const AuthProvider = ({ children }) => {
   };
 
   const authInfo = {
+    user,
+    setUser,
     createUser,
     login,
     updateUser,

@@ -6,7 +6,7 @@ import { HiOutlineInformationCircle } from "react-icons/hi";
 import { AuthContext } from "../providers/AuthProvider";
 
 const Login = () => {
-  const { login, googlePopUpSignIn, githubPopUpSignIn } =
+  const { login, googlePopUpSignIn, githubPopUpSignIn, setUser } =
     useContext(AuthContext);
 
   const formSubmitHandler = (e) => {
@@ -16,19 +16,33 @@ const Login = () => {
     const password = form.password.value;
 
     login(email, password)
-      .then((userCredential) => console.log(userCredential))
+      .then((userCredential) => {
+        const userTemp = userCredential.user;
+        setUser(userTemp);
+        console.log(userTemp);
+      })
       .catch((err) => console.error(err));
+
+    form.reset();
   };
 
   const handleGooglePopUpLogin = () => {
     googlePopUpSignIn()
-      .then((result) => console.log(result.user))
+      .then((result) => {
+        const userTemp = result.user;
+        setUser(userTemp);
+        console.log(userTemp);
+      })
       .catch((err) => console.error(err.message));
   };
 
   const handleGithubPopUpLogin = () => {
     githubPopUpSignIn()
-      .then((result) => console.log(result.user))
+      .then((result) => {
+        const userTemp = result.user;
+        setUser(userTemp);
+        console.log(userTemp);
+      })
       .catch((err) => console.error(err.message));
   };
 

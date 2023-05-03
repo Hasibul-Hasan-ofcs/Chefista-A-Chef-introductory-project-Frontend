@@ -18,9 +18,11 @@ const Signup = () => {
     createUser(email, password)
       .then((userCredential) => console.log(userCredential))
       .catch((err) => console.error(err));
-    // updateUser(name, photo)
-    //   .then((userCredential) => console.log(userCredential))
-    //   .catch((err) => console.error(err));
+    updateUser(name, photo)
+      .then((userCredential) => console.log(userCredential))
+      .catch((err) => console.error(err));
+
+    form.reset();
   };
 
   return (

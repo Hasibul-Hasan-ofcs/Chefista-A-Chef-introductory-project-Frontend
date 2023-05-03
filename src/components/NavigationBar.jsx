@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { HashLink } from "react-router-hash-link";
 import ActiveLink from "./ActiveLink";
+import { AuthContext } from "../providers/AuthProvider";
+import "./../css/navigationBar.css";
 
 const NavigationBar = () => {
+  const { user } = useContext(AuthContext);
+
   return (
     <div className="container-fluid mx-0 bg_cream_orange_01">
       <nav className="container navbar navbar-expand-lg py-4">
@@ -43,17 +46,29 @@ const NavigationBar = () => {
                 </ActiveLink>
               </div>
 
-              <div className="button-box d-flex gap-3">
-                <Link to="/login">
-                  <button className="theme-button white-mbg text-dark rounded border-0 px-3 py-2 fw-bold">
-                    Login
-                  </button>
-                </Link>
-                <Link to="/signup">
-                  <button className="theme-button rounded border-0 px-3 py-2 fw-bold">
-                    Sign Up
-                  </button>
-                </Link>
+              <div className="button-box d-flex gap-3 align-items-lg-center">
+                {user ? (
+                  <>
+                    <span className="">{user.displayName}</span>
+                    <img
+                      src={user.photoURL}
+                      className="user-image-nav rounded-circle"
+                    />
+                  </>
+                ) : (
+                  <>
+                    <Link to="/login">
+                      <button className="theme-button white-mbg text-dark rounded border-0 px-3 py-2 fw-bold">
+                        Login
+                      </button>
+                    </Link>
+                    <Link to="/signup">
+                      <button className="theme-button rounded border-0 px-3 py-2 fw-bold">
+                        Sign Up
+                      </button>
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>
