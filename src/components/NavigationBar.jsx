@@ -44,16 +44,16 @@ const NavigationBar = () => {
               </div>
 
               <div className="button-box d-flex gap-3">
-                <HashLink to="/#featured-jobs-id">
-                  <button className="bg-transparent rounded border-0 px-3 py-2 fw-bold">
+                <Link to="/login">
+                  <button className="theme-button white-mbg text-dark rounded border-0 px-3 py-2 fw-bold">
                     Login
                   </button>
-                </HashLink>
-                <HashLink to="/#featured-jobs-id">
+                </Link>
+                <Link to="/signup">
                   <button className="theme-button rounded border-0 px-3 py-2 fw-bold">
                     Sign Up
                   </button>
-                </HashLink>
+                </Link>
               </div>
             </div>
           </div>
