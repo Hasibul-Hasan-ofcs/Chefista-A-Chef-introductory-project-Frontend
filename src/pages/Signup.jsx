@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { HiOutlineInformationCircle } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
+import BannerChef2 from "./../assets/Images/chef_banner_2.jpeg";
 
 const Signup = () => {
   const { createUser, updateUser } = useContext(AuthContext);
@@ -36,9 +37,10 @@ const Signup = () => {
   }, [nameState]);
 
   return (
-    <div className="container-fluid py-5">
+    <div className="container-fluid py-5 bg_cream_orange_01">
       <div className="container mx-auto d-flex flex-column flex-lg-row gap-3 gap-lg-0">
         <div className="w-100 w-lg-50 mx-auto py-5">
+          <img className="img-fluid" src={BannerChef2} />
           <p className="text-warning">
             <HiOutlineInformationCircle /> Please note.
           </p>
@@ -48,7 +50,7 @@ const Signup = () => {
           </div>
         </div>
         <div className="form w-100 w-lg-50 p-1 p-lg-4 mx-auto">
-          <div className="rounded-2 shadow p-5 d-flex flex-column gap-3 flex-grow-1 bg_cream_orange_01">
+          <div className="rounded-2 shadow p-5 d-flex flex-column gap-3 flex-grow-1 border">
             {/* <h4 className="pb-4">LOGIN</h4> */}
             <h3 className="pb-3 text-center">Hey there!</h3>
             <p className="text-center">
