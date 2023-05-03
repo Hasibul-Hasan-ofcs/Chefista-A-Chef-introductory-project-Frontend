@@ -96,7 +96,7 @@ h4 {
 }
 
 .white-mbg {
-  background: #fff !important;
+  background: linear-gradient(to top, #dbdbdb 0%, #fff 100%) !important;
 }
 
 .theme-button:hover {
