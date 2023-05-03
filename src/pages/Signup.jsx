@@ -1,10 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { HiOutlineInformationCircle } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 
 const Signup = () => {
   const { createUser, updateUser } = useContext(AuthContext);
+  // const [upProfile, setUpProfile] = useState(null);
+  const [nameState, setNameState] = useState("");
+  const [photoState, setPhotoState] = useState("");
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
@@ -16,14 +19,21 @@ const Signup = () => {
 
     console.log(form, name, email, password, photo);
     createUser(email, password)
-      .then((userCredential) => console.log(userCredential))
-      .catch((err) => console.error(err));
-    updateUser(name, photo)
-      .then((userCredential) => console.log(userCredential))
+      .then((userCredential) => {
+        setNameState(name);
+        setPhotoState(photo);
+        console.log(userCredential);
+      })
       .catch((err) => console.error(err));
 
     form.reset();
   };
+
+  useEffect(() => {
+    updateUser(nameState, photoState)
+      .then((userCredential) => console.log(userCredential))
+      .catch((err) => console.error(err));
+  }, [nameState]);
 
   return (
     <div className="container-fluid py-5">
