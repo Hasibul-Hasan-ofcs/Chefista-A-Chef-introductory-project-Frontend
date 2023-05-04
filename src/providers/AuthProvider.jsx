@@ -23,16 +23,20 @@ const githubProvider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const createUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const login = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   const updateUser = (displayName, photoURL) => {
+    setLoading(true);
     // console.log(auth.currentUser, displayName, photoURL);
     return updateProfile(auth.currentUser, {
       displayName: displayName,
@@ -41,10 +45,12 @@ const AuthProvider = ({ children }) => {
   };
 
   const googlePopUpSignIn = () => {
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
   const githubPopUpSignIn = () => {
+    setLoading(true);
     return signInWithPopup(auth, githubProvider);
   };
 
@@ -56,6 +62,7 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (loggedInUser) => {
       // console.log("logged in user inside auth state observer", loggedInUser);
       setUser(loggedInUser);
+      setLoading(false);
     });
 
     return () => unSubscribe();
@@ -63,6 +70,7 @@ const AuthProvider = ({ children }) => {
 
   const authInfo = {
     user,
+    loading,
     createUser,
     login,
     updateUser,

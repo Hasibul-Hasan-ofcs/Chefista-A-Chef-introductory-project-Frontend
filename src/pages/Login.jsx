@@ -122,7 +122,7 @@ const Login = () => {
                     Sign Up
                   </Link>
                 </p>
-                <p className="text-center">
+                {/* <p className="text-center">
                   Forgot password? &nbsp;
                   <Link
                     to="/login"
@@ -130,7 +130,7 @@ const Login = () => {
                   >
                     Click Here
                   </Link>
-                </p>
+                </p> */}
                 <p className="text-center border-bottom py-3">
                   Also sign in using
                 </p>
