@@ -128,6 +128,12 @@ h4 {
   width: 40%;
 }
 
+@media (max-width: 600px) {
+  .theme-border-img {
+    width: 75%;
+  }
+}
+
 .header_text {
   font-weight: 800;
   font-size: 45px;
