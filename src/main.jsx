@@ -9,6 +9,7 @@ import Blogs from "./pages/Blogs";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import AuthProvider from "./providers/AuthProvider";
+import { allChefsListFetch } from "./js/jsonLoader";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        // loader: jobCategoryListFetch,
+        loader: allChefsListFetch,
       },
       // {
       //   path: "/job/:id",

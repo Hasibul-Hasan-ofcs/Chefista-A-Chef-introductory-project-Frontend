@@ -5,6 +5,9 @@ import { AuthContext } from "../providers/AuthProvider";
 import "./../css/navigationBar.css";
 import { FaCaretDown } from "react-icons/fa";
 
+import "react-tooltip/dist/react-tooltip.css";
+import { Tooltip as ReactTooltip } from "react-tooltip";
+
 const NavigationBar = () => {
   const { user, logout } = useContext(AuthContext);
 
@@ -76,6 +79,7 @@ const NavigationBar = () => {
                     <button
                       className="profile_button border-0 bg-transparent"
                       onClick={profileButtonClickHandler}
+                      id="app-title"
                     >
                       <img
                         src={user.photoURL}
@@ -83,6 +87,12 @@ const NavigationBar = () => {
                       />
                       <FaCaretDown />
                     </button>
+
+                    <ReactTooltip
+                      anchorId="app-title"
+                      place="bottom"
+                      content={user.displayName}
+                    />
 
                     {/* dropdown */}
                     <div className={classStateDD}>

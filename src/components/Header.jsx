@@ -1,5 +1,6 @@
 import React from "react";
-import Chef_Banner_IMG from "./../assets/chef_02_ds.jpg";
+import Chef_Banner_IMG from "./../assets/images/chef_02_ds.jpg";
+import Chef_Banner_S_IMG from "./../assets/images/chef_03_ds.jpg";
 import { HashLink } from "react-router-hash-link";
 
 const Header = () => {
@@ -39,7 +40,7 @@ const Header = () => {
             </div>
             <div className="img-box p-3 theme-border-img-2 position-absolute bottom-0 end-0 bg-white">
               <img
-                src={Chef_Banner_IMG}
+                src={Chef_Banner_S_IMG}
                 className="w-100 header-img rounded-4"
                 alt="back to job"
               />
