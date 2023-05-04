@@ -19,7 +19,7 @@ const NavigationBar = () => {
       `dropdown bg-white rounded overflow-hidden d-flex flex-column ${displayValue}`
     );
 
-    console.log(classStateDD);
+    // console.log(classStateDD);
   };
 
   useEffect(() => {
