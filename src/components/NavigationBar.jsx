@@ -64,12 +64,12 @@ const NavigationBar = () => {
                 <ActiveLink to="/" classes="gray-01 fs-14 text-decoration-none">
                   Home
                 </ActiveLink>
-                <ActiveLink
+                {/* <ActiveLink
                   to="/chef-recipes/1"
                   classes="gray-01 fs-14 text-decoration-none"
                 >
                   Chef Recipes
-                </ActiveLink>
+                </ActiveLink> */}
                 <ActiveLink
                   to="/blogs"
                   classes="gray-01 fs-14 text-decoration-none"

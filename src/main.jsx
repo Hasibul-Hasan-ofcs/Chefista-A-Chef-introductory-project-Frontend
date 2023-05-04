@@ -11,6 +11,7 @@ import Signup from "./pages/Signup";
 import AuthProvider from "./providers/AuthProvider";
 import { allChefsListFetch, findChefLoader } from "./js/jsonLoader";
 import ChefRecipes from "./pages/ChefRecipes";
+import PrivateRoute from "./components/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/chef-recipes/:id",
-        element: <ChefRecipes></ChefRecipes>,
+        element: (
+          <PrivateRoute>
+            <ChefRecipes></ChefRecipes>
+          </PrivateRoute>
+        ),
         loader: findChefLoader,
       },
       {

@@ -6,8 +6,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 const ChefRecipes = () => {
   const [recipes, setRecipes] = useState([]);
-  const [disabledState, setDisabledState] = useState(false);
+  const [disabledState, setDisabledState] = useState({});
   const loader = useLoaderData();
+
   console.log(recipes);
 
   useEffect(() => {
@@ -18,7 +19,7 @@ const ChefRecipes = () => {
   }, []);
 
   const addFevHandler = (e) => {
-    toast.success("Added to favorites..", {
+    toast.success("Added to favorites. \n Button Disabled ⚠", {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -28,7 +29,8 @@ const ChefRecipes = () => {
       progress: undefined,
       theme: "light",
     });
-    setDisabledState(true);
+    // console.log(indx);
+    // setDisabledState(...disabledState, { indx: true });
     e.target.disabled = true;
   };
 
@@ -57,6 +59,8 @@ const ChefRecipes = () => {
           <img src={loader.picture} className="img-fluid" />
         </div>
       </div>
+
+      {/* recipes */}
       <div className="container mx-auto py-5">
         <h2 className="text-center fw-bolder py-5">
           <span className="theme-color pacifico-font">Chef's</span> Recipes
@@ -82,9 +86,7 @@ const ChefRecipes = () => {
               </p>
               <div className="button-box ">
                 <button
-                  className={`theme-button rounded border-0 px-3 py-1 fw-bold ${
-                    disabledState && "disabled-btn"
-                  }`}
+                  className={`theme-button rounded border-0 px-3 py-1 fw-bold`}
                   onClick={addFevHandler}
                 >
                   Add to Favorites
