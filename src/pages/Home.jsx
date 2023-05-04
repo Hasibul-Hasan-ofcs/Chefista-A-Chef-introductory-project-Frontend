@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import { useLoaderData } from "react-router-dom";
 import TopChefs from "../components/TopChefs";
 import Sponsors from "../components/Sponsors";
+import ChefSpecialities from "../components/ChefSpecialities";
 
 const Home = () => {
   const loader = useLoaderData();
@@ -12,6 +13,7 @@ const Home = () => {
     <>
       <Header></Header>
       <TopChefs loader={loader}></TopChefs>
+      <ChefSpecialities></ChefSpecialities>
       <Sponsors></Sponsors>
     </>
   );

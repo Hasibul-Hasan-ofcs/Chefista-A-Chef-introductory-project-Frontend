@@ -31,7 +31,9 @@ const TopChefs = ({ loader }) => {
                     {elm.name}
                   </p> */}
                   <div className="job_type d-flex flex-column pb-3 gap-1">
-                    <span className="">No of recipes: {elm.num_recipes}</span>
+                    <span className="">
+                      No of recipes: {elm.num_of_recipes}
+                    </span>
                     <span className="">
                       Years of experience: {elm.years_of_experience}
                     </span>
