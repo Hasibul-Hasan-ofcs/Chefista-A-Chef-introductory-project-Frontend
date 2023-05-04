@@ -6,3 +6,8 @@
 .name_chef {
   font-size: 3rem;
 }
+
+.recipe-img {
+  height: 200;
+  width: 200;
+}

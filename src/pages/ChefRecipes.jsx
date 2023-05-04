@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./../css/chefRecipes.css";
 import { useLoaderData } from "react-router-dom";
 
 const ChefRecipes = () => {
+  const [recipes, setRecipes] = useState([]);
   const loader = useLoaderData();
-  console.log(loader);
+  console.log(recipes);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/recipes/${loader._id}`)
+      .then((result) => result.json())
+      .then((data) => setRecipes(data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  // useEffect(()=>{
+
+  // },[recipesState])
 
   return (
     <div className="container-fluid mx-0 px-0">
@@ -21,37 +33,52 @@ const ChefRecipes = () => {
             <p className="pb-0 mb-0 text-white">
               <b>Numbers of recipes:</b> {loader.num_of_recipes}
             </p>
-            <p className="pb-0 mb-0 text-white">Likes: {loader.likes}</p>
+            <p className="pb-0 mb-0 text-white">
+              <b>Likes:</b> {loader.likes}
+            </p>
             <p className="pb-0 mb-0 text-white">
               <b>Bio/description:</b> {loader.bio}
             </p>
           </div>
           <img src={loader.picture} className="img-fluid" />
         </div>
-
-        {/* <div className="col-12 col-md-6 col-lg-4" key={indx}>
-          <div className="rounded border p-4 mb-4">
-            <img src={japaneseChef01} className="pb-4 img-fluid rounded" />
-
-            <h5 className="fw-bolder dark-01  py-3">{elm.name}</h5>
-            <div className="job_type d-flex flex-column pb-3 gap-1">
-              <span className="">No of recipes: {elm.num_recipes}</span>
-              <span className="">
-                Years of experience: {elm.years_of_experience}
-              </span>
-              <span className="">Total Likes: {elm.likes}</span>
-            </div>
-
-            <div className="button-box ">
-              <Link to={`/job/${elm._id}`}>
-                {" "}
+      </div>
+      <div className="container mx-auto py-5">
+        <h2 className="text-center fw-bolder py-5">
+          <span className="theme-color pacifico-font">Chef's</span> Recipes
+        </h2>
+        {recipes.map((elm, indx) => {
+          return (
+            <div
+              className="rounded shadow p-4 d-flex flex-column py5"
+              key={indx}
+            >
+              <img src="" className="recipe-img" />
+              <p>
+                <b>Recipe Name:</b> {elm.name}
+              </p>
+              <p>
+                <b>Ingredients :</b> {elm.ingredients}
+              </p>
+              <p>
+                <b>Cooking Method:</b> {elm.cooking_method}
+                {elm.cooking_method
+                  .slice(0, elm.cooking_method.length - 1)
+                  .join(", ") +
+                  ", and " +
+                  elm.cooking_method.slice(-1)}
+              </p>
+              <p>
+                <b>Rating:</b> {elm.rating}
+              </p>
+              <div className="button-box ">
                 <button className="theme-button rounded border-0 px-3 py-1 fw-bold">
-                  View Recipes
+                  Add to Favorites
                 </button>
-              </Link>
+              </div>
             </div>
-          </div>
-        </div> */}
+          );
+        })}
       </div>
     </div>
   );
