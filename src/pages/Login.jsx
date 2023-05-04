@@ -125,7 +125,7 @@ const Login = () => {
                 <p className="text-center">
                   Forgot password? &nbsp;
                   <Link
-                    to="/signup"
+                    to="/login"
                     className="fw-bold text-decoration-none theme-color"
                   >
                     Click Here

@@ -6,7 +6,7 @@ import BannerChef2 from "./../assets/Images/chef_banner_2.jpeg";
 
 const Signup = () => {
   const { createUser, updateUser } = useContext(AuthContext);
-  // const [upProfile, setUpProfile] = useState(null);
+  const [upProfile, setUpProfile] = useState(false);
   const [nameState, setNameState] = useState("");
   const [photoState, setPhotoState] = useState("");
 
@@ -31,9 +31,13 @@ const Signup = () => {
   };
 
   useEffect(() => {
-    updateUser(nameState, photoState)
-      .then((userCredential) => console.log(userCredential))
-      .catch((err) => console.error(err));
+    if (upProfile === false) {
+      setUpProfile(!upProfile);
+    } else {
+      updateUser(nameState, photoState)
+        .then((userCredential) => console.log(userCredential))
+        .catch((err) => console.error(err));
+    }
   }, [nameState]);
 
   return (
