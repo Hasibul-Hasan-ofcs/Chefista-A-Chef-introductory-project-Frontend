@@ -1,0 +1,8 @@
+.banner {
+  min-height: 250px;
+  background: linear-gradient(to top left, #dd7556 0%, #ff9553 100%);
+}
+
+.name_chef {
+  font-size: 3rem;
+}

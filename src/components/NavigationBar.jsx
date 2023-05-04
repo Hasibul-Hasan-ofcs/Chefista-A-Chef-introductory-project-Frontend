@@ -65,6 +65,12 @@ const NavigationBar = () => {
                   Home
                 </ActiveLink>
                 <ActiveLink
+                  to="/chef-recipes/1"
+                  classes="gray-01 fs-14 text-decoration-none"
+                >
+                  Chef Recipes
+                </ActiveLink>
+                <ActiveLink
                   to="/blogs"
                   classes="gray-01 fs-14 text-decoration-none"
                 >
@@ -75,7 +81,7 @@ const NavigationBar = () => {
               <div className="button-box d-flex gap-3 align-items-center">
                 {user ? (
                   <>
-                    <span className="">{user.displayName}</span>
+                    {/* <span className="">{user.displayName}</span> */}
                     <button
                       className="profile_button border-0 bg-transparent"
                       onClick={profileButtonClickHandler}

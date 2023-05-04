@@ -8,7 +8,9 @@ const TopChefs = ({ loader }) => {
   console.log(chefs);
   return (
     <div className="py-5 my-5" id="featured-jobs-id">
-      <h2 className="text-center fw-bolder">Top Chefs</h2>
+      <h2 className="text-center fw-bolder">
+        Top <span className="theme-color pacifico-font">Chefs</span>
+      </h2>
       <div className="container">
         <p className="gray-01 fs-14 text-center py-4">
           Discover the Excellence of Japanese Culinary Craftsmanship; Where
@@ -21,7 +23,8 @@ const TopChefs = ({ loader }) => {
               <div className="col-12 col-md-6 col-lg-4" key={indx}>
                 <div className="rounded border p-4 mb-4">
                   <img
-                    src={japaneseChef01}
+                    // src={japaneseChef01}
+                    src={elm.picture}
                     className="pb-4 img-fluid rounded"
                   />
 
@@ -38,7 +41,7 @@ const TopChefs = ({ loader }) => {
                   </div>
 
                   <div className="button-box ">
-                    <Link to={`/job/${elm._id}`}>
+                    <Link to={`/chef-recipes/${elm._id}`}>
                       {" "}
                       <button className="theme-button rounded border-0 px-3 py-1 fw-bold">
                         View Recipes

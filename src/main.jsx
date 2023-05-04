@@ -9,7 +9,8 @@ import Blogs from "./pages/Blogs";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import AuthProvider from "./providers/AuthProvider";
-import { allChefsListFetch } from "./js/jsonLoader";
+import { allChefsListFetch, findChefLoader } from "./js/jsonLoader";
+import ChefRecipes from "./pages/ChefRecipes";
 
 const router = createBrowserRouter([
   {
@@ -21,19 +22,11 @@ const router = createBrowserRouter([
         element: <Home></Home>,
         loader: allChefsListFetch,
       },
-      // {
-      //   path: "/job/:id",
-      //   element: <JobDetails></JobDetails>,
-      //   loader: jobSpecificData,
-      // },
-      // {
-      //   path: "/statistics",
-      //   element: <Statistics></Statistics>,
-      // },
-      // {
-      //   path: "/appliedjobs",
-      //   element: <AppliedJobs></AppliedJobs>,
-      // },
+      {
+        path: "/chef-recipes/:id",
+        element: <ChefRecipes></ChefRecipes>,
+        loader: findChefLoader,
+      },
       {
         path: "/blogs",
         element: <Blogs></Blogs>,
