@@ -1,6 +1,4 @@
 import React from "react";
-// import japaneseChef01 from "./../assets/images/japaneseChef01.jpg";
-import japaneseChef01 from "./../assets/images/japaneseChef01.png";
 import { Link } from "react-router-dom";
 
 const TopChefs = ({ loader }) => {
