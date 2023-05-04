@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./../css/form.css";
 import { Link, useNavigate } from "react-router-dom";
 import { FaGithub, FaGoogle } from "react-icons/fa";
@@ -7,6 +7,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import BannerChef2 from "./../assets/Images/chef_banner_2.jpeg";
 
 const Login = () => {
+  const [errorState, setErrorState] = useState(null);
   const { login, googlePopUpSignIn, githubPopUpSignIn } =
     useContext(AuthContext);
 
@@ -24,7 +25,7 @@ const Login = () => {
         // console.log(userTemp);
         navigate("/");
       })
-      .catch((err) => console.error(err));
+      .catch((err) => setErrorState(err.message));
 
     form.reset();
   };
@@ -65,6 +66,9 @@ const Login = () => {
         <div className="form w-100 w-lg-50 p-1 p-lg-4 mx-auto">
           <div className="rounded-2 shadow p-5 d-flex flex-column gap-3 flex-grow-1 border">
             {/* <h4 className="pb-4">LOGIN</h4> */}
+            {errorState && (
+              <h5 className="text-danger fw-bold text-center">{errorState}</h5>
+            )}
             <h3 className="pb-3 text-center">Hey there!</h3>
             <p className="text-center">
               Welcome back. Please use your credentials to get started with

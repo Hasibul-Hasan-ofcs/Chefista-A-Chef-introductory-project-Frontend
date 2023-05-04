@@ -9,6 +9,7 @@ const Signup = () => {
   const [upProfile, setUpProfile] = useState(false);
   const [nameState, setNameState] = useState("");
   const [photoState, setPhotoState] = useState("");
+  const [errorState, setErrorState] = useState(null);
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
@@ -17,6 +18,18 @@ const Signup = () => {
     const email = form.email.value;
     const password = form.password.value;
     const photo = form.photo.value;
+
+    if (email == "") {
+      return setErrorState("email field cannot be empty");
+    }
+
+    if (password == "") {
+      return setErrorState("password field cannot be empty");
+    }
+
+    if (password.length < 6) {
+      return setErrorState("Password should be atleast 6 characters long");
+    }
 
     console.log(form, name, email, password, photo);
     createUser(email, password)
@@ -56,6 +69,9 @@ const Signup = () => {
         <div className="form w-100 w-lg-50 p-1 p-lg-4 mx-auto">
           <div className="rounded-2 shadow p-5 d-flex flex-column gap-3 flex-grow-1 border">
             {/* <h4 className="pb-4">LOGIN</h4> */}
+            {errorState && (
+              <h5 className="text-danger fw-bold text-center">{errorState}</h5>
+            )}
             <h3 className="pb-3 text-center">Hey there!</h3>
             <p className="text-center">
               Please provide your credentials to get started with one of the
@@ -69,7 +85,6 @@ const Signup = () => {
                   className="form-control"
                   id="floatingName"
                   placeholder="your name"
-                  required
                 />
                 <label htmlFor="floatingName">Name</label>
               </div>
@@ -80,7 +95,6 @@ const Signup = () => {
                   className="form-control"
                   id="floatingEmail"
                   placeholder="name@example.com"
-                  required
                 />
                 <label htmlFor="floatingEmail">Email address</label>
               </div>
@@ -91,7 +105,6 @@ const Signup = () => {
                   className="form-control"
                   id="floatingPassword"
                   placeholder="Password"
-                  required
                 />
                 <label htmlFor="floatingPassword">Password</label>
               </div>
@@ -105,7 +118,7 @@ const Signup = () => {
                 />
                 <label htmlFor="floatingPhoto">Photo URL</label>
               </div>
-              <div className="mb-3 form-check">
+              {/* <div className="mb-3 form-check">
                 <input
                   type="checkbox"
                   className="form-check-input"
@@ -117,7 +130,7 @@ const Signup = () => {
                     Terms and Conditions
                   </span>
                 </label>
-              </div>
+              </div> */}
 
               <button
                 type="submit"
