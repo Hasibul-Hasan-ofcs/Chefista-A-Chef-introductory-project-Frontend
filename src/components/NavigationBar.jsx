@@ -1,11 +1,34 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ActiveLink from "./ActiveLink";
 import { AuthContext } from "../providers/AuthProvider";
 import "./../css/navigationBar.css";
+import { FaCaretDown } from "react-icons/fa";
 
 const NavigationBar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
+
+  const [displayValue, setDisplayValue] = useState("d-none");
+  const [classStateDD, setClassStateDD] = useState(
+    `dropdown bg-white rounded overflow-hidden d-flex flex-column d-none`
+  );
+
+  const profileButtonClickHandler = (e) => {
+    setDisplayValue(displayValue === "d-none" ? "d-block" : "d-none");
+    setClassStateDD(
+      `dropdown bg-white rounded overflow-hidden d-flex flex-column ${displayValue}`
+    );
+
+    console.log(classStateDD);
+  };
+
+  useEffect(() => {
+    setDisplayValue(displayValue === "d-none" ? "d-block" : "d-none");
+  }, []);
+
+  const logoutHandler = () => {
+    logout();
+  };
 
   return (
     <div className="container-fluid mx-0 bg_cream_orange_01">
@@ -46,14 +69,30 @@ const NavigationBar = () => {
                 </ActiveLink>
               </div>
 
-              <div className="button-box d-flex gap-3 align-items-lg-center">
+              <div className="button-box d-flex gap-3 align-items-center">
                 {user ? (
                   <>
                     <span className="">{user.displayName}</span>
-                    <img
-                      src={user.photoURL}
-                      className="user-image-nav rounded-circle"
-                    />
+                    <button
+                      className="profile_button border-0 bg-transparent"
+                      onClick={profileButtonClickHandler}
+                    >
+                      <img
+                        src={user.photoURL}
+                        className="user-image-nav rounded-circle"
+                      />
+                      <FaCaretDown />
+                    </button>
+
+                    {/* dropdown */}
+                    <div className={classStateDD}>
+                      <button
+                        className="py-2 bg-transparent border-0 border-bottom"
+                        onClick={logoutHandler}
+                      >
+                        Sign Out
+                      </button>
+                    </div>
                   </>
                 ) : (
                   <>

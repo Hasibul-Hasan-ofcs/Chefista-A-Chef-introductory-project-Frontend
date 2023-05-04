@@ -1,14 +1,16 @@
 import React, { useContext } from "react";
 import "./../css/form.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { HiOutlineInformationCircle } from "react-icons/hi";
 import { AuthContext } from "../providers/AuthProvider";
 import BannerChef2 from "./../assets/Images/chef_banner_2.jpeg";
 
 const Login = () => {
-  const { login, googlePopUpSignIn, githubPopUpSignIn, setUser } =
+  const { login, googlePopUpSignIn, githubPopUpSignIn } =
     useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
@@ -19,8 +21,8 @@ const Login = () => {
     login(email, password)
       .then((userCredential) => {
         const userTemp = userCredential.user;
-        setUser(userTemp);
-        console.log(userTemp);
+        // console.log(userTemp);
+        navigate("/");
       })
       .catch((err) => console.error(err));
 
@@ -31,8 +33,8 @@ const Login = () => {
     googlePopUpSignIn()
       .then((result) => {
         const userTemp = result.user;
-        setUser(userTemp);
-        console.log(userTemp);
+        // console.log(userTemp);
+        navigate("/");
       })
       .catch((err) => console.error(err.message));
   };
@@ -41,8 +43,8 @@ const Login = () => {
     githubPopUpSignIn()
       .then((result) => {
         const userTemp = result.user;
-        setUser(userTemp);
-        console.log(userTemp);
+        // console.log(userTemp);
+        navigate("/");
       })
       .catch((err) => console.error(err.message));
   };

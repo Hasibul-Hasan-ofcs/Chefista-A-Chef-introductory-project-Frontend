@@ -2,3 +2,22 @@
   height: 40px;
   width: 40px;
 }
+
+.profile_button {
+  position: relative;
+}
+
+.dropdown {
+  width: 200px;
+  position: absolute;
+  top: 100%;
+  right: 0%;
+  transition: all 0.3s linear;
+}
+
+@media (max-width: 960px) {
+  .dropdown {
+    right: 50%;
+    transform: translateX(50%);
+  }
+}
