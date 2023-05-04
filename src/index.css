@@ -163,6 +163,11 @@ h4 {
   height: auto;
 }
 
+.sponsor-img {
+  height: 40px;
+  filter: grayscale(1);
+}
+
 .categoryCard,
 .qnaCard {
   background: linear-gradient(
