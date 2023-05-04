@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import LazyLoad from "react-lazy-load";
 
 const TopChefs = ({ loader }) => {
   const { chefs } = loader;
@@ -20,11 +21,13 @@ const TopChefs = ({ loader }) => {
             return (
               <div className="col-12 col-md-6 col-lg-4" key={indx}>
                 <div className="rounded border p-4 mb-4">
-                  <img
-                    // src={japaneseChef01}
-                    src={elm.picture}
-                    className="pb-4 img-fluid rounded"
-                  />
+                  <LazyLoad>
+                    <img
+                      // src={japaneseChef01}
+                      src={elm.picture}
+                      className="pb-4 img-fluid rounded"
+                    />
+                  </LazyLoad>
 
                   <h5 className="fw-bolder dark-01  py-3">{elm.name}</h5>
                   {/* <p className="my-0 py-0 gray-01 fw-semibold py-3">
