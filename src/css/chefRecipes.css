@@ -8,6 +8,11 @@
 }
 
 .recipe-img {
-  height: 200;
-  width: 200;
+  height: 200px;
+  width: 200px;
+}
+
+.disabled-btn {
+  background: gray !important;
+  color: #000 !important;
 }

@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./../css/chefRecipes.css";
 import { useLoaderData } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ChefRecipes = () => {
   const [recipes, setRecipes] = useState([]);
+  const [disabledState, setDisabledState] = useState(false);
   const loader = useLoaderData();
   console.log(recipes);
 
@@ -14,9 +17,20 @@ const ChefRecipes = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  // useEffect(()=>{
-
-  // },[recipesState])
+  const addFevHandler = (e) => {
+    toast.success("Added to favorites..", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+    setDisabledState(true);
+    e.target.disabled = true;
+  };
 
   return (
     <div className="container-fluid mx-0 px-0">
@@ -50,29 +64,29 @@ const ChefRecipes = () => {
         {recipes.map((elm, indx) => {
           return (
             <div
-              className="rounded shadow p-4 d-flex flex-column py5"
+              className="rounded shadow p-4 d-flex flex-column my-5"
               key={indx}
             >
-              <img src="" className="recipe-img" />
+              <img src={elm.img} className="recipe-img rounded my-4" />
               <p>
                 <b>Recipe Name:</b> {elm.name}
               </p>
               <p>
-                <b>Ingredients :</b> {elm.ingredients}
+                <b>Ingredients :</b> {elm.ingredients.join(", ")}
               </p>
               <p>
                 <b>Cooking Method:</b> {elm.cooking_method}
-                {elm.cooking_method
-                  .slice(0, elm.cooking_method.length - 1)
-                  .join(", ") +
-                  ", and " +
-                  elm.cooking_method.slice(-1)}
               </p>
               <p>
                 <b>Rating:</b> {elm.rating}
               </p>
               <div className="button-box ">
-                <button className="theme-button rounded border-0 px-3 py-1 fw-bold">
+                <button
+                  className={`theme-button rounded border-0 px-3 py-1 fw-bold ${
+                    disabledState && "disabled-btn"
+                  }`}
+                  onClick={addFevHandler}
+                >
                   Add to Favorites
                 </button>
               </div>
@@ -80,6 +94,7 @@ const ChefRecipes = () => {
           );
         })}
       </div>
+      <ToastContainer />
     </div>
   );
 };
