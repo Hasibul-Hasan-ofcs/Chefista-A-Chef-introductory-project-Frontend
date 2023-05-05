@@ -9,7 +9,7 @@ const ChefSpecialities = () => {
       <h2 className="text-center fw-bolder pt-5">
         <span className={`${theme ? "text-white" : ""}`}>Chef in</span>{" "}
         <span className="theme-color pacifico-font">Japanese</span>{" "}
-        <span className={`${theme ? "text-white" : ""}`}>kitchen</span>{" "}
+        <span className={`${theme ? "text-white" : ""}`}>Kitchen</span>{" "}
       </h2>
       <div className="container d-flex flex-column flex-lg-row">
         <div className="container mx-0 py-5 my-4">
