@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import Chef_Banner_IMG from "./../assets/images/chef_02_ds.jpg";
 import Chef_Banner_S_IMG from "./../assets/images/chef_03_ds.jpg";
 import { HashLink } from "react-router-hash-link";
+import { AuthContext } from "../providers/AuthProvider";
 
 const Header = () => {
+  const { theme } = useContext(AuthContext);
   return (
-    <div className="bg_cream_orange_01 py-5">
-      <div className="container px-0 py-5 py-lg-0 mx-auto d-flex flex-column-reverse flex-lg-row">
+    <div className={`${theme ? "bg-dark-secondary" : "bg_cream_orange_01"}`}>
+      <div className="container px-0 py-lg-5 py-lg-0 mx-auto d-flex flex-column-reverse flex-lg-row">
         <div className="container py-5 width-50 pe-0 pe-lg-5 d-flex flex-column align-items-center align-items-lg-start justify-content-center gap-4">
-          <h1 className="header_text pe-0 pe-lg-5 d-flex flex-column align-items-center align-items-lg-start">
+          <h1
+            className={`${
+              theme ? "text-white" : "text-dark"
+            } header_text pe-0 pe-lg-5 d-flex flex-column align-items-center align-items-lg-start`}
+          >
             <span className="text-1-header">The Culinary</span>
             <span className="text-2-header">Genius of Innovative</span>
             <span className="theme-color text-3-header pacifico-font">
@@ -29,7 +35,7 @@ const Header = () => {
             </HashLink>
           </div>
         </div>
-        <div className="container px-0 width-50">
+        <div className="container px-2 px-lg-0 width-50">
           <div className="container-fluid position-relative height-520">
             <div className="img-box p-3 theme-border-img position-absolute top-0 start-0 bg-white">
               <img

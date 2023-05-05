@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import LazyLoad from "react-lazy-load";
+import { AuthContext } from "../providers/AuthProvider";
 
 const TopChefs = ({ loader }) => {
+  const { theme } = useContext(AuthContext);
   const { chefs } = loader;
-  console.log(chefs);
+  // console.log(chefs);
   return (
-    <div className="py-5 my-5" id="featured-jobs-id">
-      <h2 className="text-center fw-bolder">
-        Top <span className="theme-color pacifico-font">Chefs</span>
+    <div
+      className={`py-5 ${theme ? "bg-dark-primary" : ""}`}
+      id="featured-jobs-id"
+    >
+      <h2 className={`text-center fw-bolder mt-5`}>
+        <span className={`${theme ? "text-white" : ""}`}>Top</span>{" "}
+        <span className="theme-color pacifico-font">Chefs</span>
       </h2>
-      <div className="container">
+      <div className="container pt-3 pb-5">
         <p className="gray-01 fs-14 text-center py-4">
           Discover the Excellence of Japanese Culinary Craftsmanship; Where
           Every Dish is a Work of Art. Let the Masterful Techniques and
@@ -20,7 +26,11 @@ const TopChefs = ({ loader }) => {
           {chefs.map((elm, indx) => {
             return (
               <div className="col-12 col-md-6 col-lg-4" key={indx}>
-                <div className="rounded border p-4 mb-4">
+                <div
+                  className={`rounded border-0 shadow p-4 mb-4 ${
+                    theme ? "bg-dark-secondary" : ""
+                  }`}
+                >
                   <LazyLoad>
                     <img
                       // src={japaneseChef01}
@@ -29,18 +39,40 @@ const TopChefs = ({ loader }) => {
                     />
                   </LazyLoad>
 
-                  <h5 className="fw-bolder dark-01  py-3">{elm.name}</h5>
+                  <h5
+                    className={`fw-bolder dark-01 py-3 ${
+                      theme ? "theme-color" : ""
+                    }`}
+                  >
+                    {elm.name}
+                  </h5>
                   {/* <p className="my-0 py-0 gray-01 fw-semibold py-3">
                     {elm.name}
                   </p> */}
                   <div className="job_type d-flex flex-column pb-3 gap-1">
-                    <span className="">
-                      No of recipes: {elm.num_of_recipes}
+                    <span
+                      className={`d-flex justify-content-between ${
+                        theme ? "text-white" : ""
+                      }`}
+                    >
+                      <span>No of recipes:</span>{" "}
+                      <span>{elm.num_of_recipes}</span>
                     </span>
-                    <span className="">
-                      Years of experience: {elm.years_of_experience}
+                    <span
+                      className={`d-flex justify-content-between ${
+                        theme ? "text-white" : ""
+                      }`}
+                    >
+                      <span>Years of experience:</span>{" "}
+                      <span>{elm.years_of_experience}</span>
                     </span>
-                    <span className="">Total Likes: {elm.likes}</span>
+                    <span
+                      className={`d-flex justify-content-between ${
+                        theme ? "text-white" : ""
+                      }`}
+                    >
+                      <span>Total Likes:</span> <span>{elm.likes}</span>
+                    </span>
                   </div>
 
                   <div className="button-box ">

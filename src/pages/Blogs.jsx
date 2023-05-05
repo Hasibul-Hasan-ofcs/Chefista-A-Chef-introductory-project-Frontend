@@ -28,7 +28,11 @@ const Blogs = () => {
       <h1 className="text-center py-5">Blogs</h1>
       <div className="container mx-auto d-flex align-items-center justify-content-center">
         <Pdf targetRef={ref} filename="code-example.pdf">
-          {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
+          {({ toPdf }) => (
+            <button className="btn theme-button" onClick={toPdf}>
+              Generate Pdf
+            </button>
+          )}
         </Pdf>
       </div>
 

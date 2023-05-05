@@ -8,11 +8,16 @@
 }
 
 .dropdown {
-  width: 200px;
+  min-width: 200px;
   position: absolute;
   top: 100%;
   right: 0%;
   transition: all 0.3s linear;
+  z-index: 20;
+}
+
+.dropdown-button:hover {
+  background: #e6e6e6 !important;
 }
 
 @media (max-width: 960px) {

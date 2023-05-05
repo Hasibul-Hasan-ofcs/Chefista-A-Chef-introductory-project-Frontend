@@ -6,7 +6,13 @@ import { Spinner } from "react-bootstrap";
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
 
-  if (loading) return <Spinner animation="grow" />;
+  if (loading)
+    return (
+      <div className="d-flex py-5 justify-content-center">
+        <Spinner animation="grow" />
+      </div>
+    );
+
   if (user) return children;
 
   return <Navigate to="/login"></Navigate>;

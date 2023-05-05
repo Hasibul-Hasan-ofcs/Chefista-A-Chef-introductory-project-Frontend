@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import SectionImg from "./../assets/Images/sec_i01.jpg";
+import { AuthContext } from "../providers/AuthProvider";
 
 const ChefSpecialities = () => {
+  const { theme } = useContext(AuthContext);
   return (
-    <div>
-      <h2 className="text-center fw-bolder">
-        Chef in <span className="theme-color pacifico-font">Japanese</span>{" "}
-        kitchens
+    <div className={`pt-5 ${theme ? "bg-dark-secondary" : ""}`}>
+      <h2 className="text-center fw-bolder pt-5">
+        <span className={`${theme ? "text-white" : ""}`}>Chef in</span>{" "}
+        <span className="theme-color pacifico-font">Japanese</span>{" "}
+        <span className={`${theme ? "text-white" : ""}`}>kitchen</span>{" "}
       </h2>
       <div className="container d-flex flex-column flex-lg-row">
         <div className="container mx-0 py-5 my-4">
@@ -14,9 +17,10 @@ const ChefSpecialities = () => {
         </div>
         <div className="container mx-0 py-5">
           <h3 className="fw-bolder py-4">
-            <span className="theme-color pacifico-font">Chef</span> &nbsp; says
+            <span className="theme-color pacifico-font">Chef</span> &nbsp;{" "}
+            <span className={`${theme ? "text-white" : ""}`}>says</span>
           </h3>
-          <p>
+          <p className={`${theme ? "text-white" : ""}`}>
             As a Japanese chef, I am proud to say that my country has a rich
             culinary history and a diverse range of food styles that are enjoyed
             by people all over the world. Japanese cuisine has gained a lot of

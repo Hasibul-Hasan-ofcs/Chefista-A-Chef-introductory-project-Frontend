@@ -3,23 +3,30 @@ import { Link } from "react-router-dom";
 import ActiveLink from "./ActiveLink";
 import { AuthContext } from "../providers/AuthProvider";
 import "./../css/navigationBar.css";
-import { FaCaretDown } from "react-icons/fa";
+import {
+  FaAffiliatetheme,
+  FaBars,
+  FaBookmark,
+  FaCaretDown,
+  FaSignOutAlt,
+  FaUserCog,
+} from "react-icons/fa";
 
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 
 const NavigationBar = () => {
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout, theme, setTheme } = useContext(AuthContext);
 
   const [displayValue, setDisplayValue] = useState("d-none");
   const [classStateDD, setClassStateDD] = useState(
-    `dropdown bg-white rounded overflow-hidden d-flex flex-column d-none`
+    `dropdown shadow bg-white rounded overflow-hidden d-flex flex-column d-none`
   );
 
   const profileButtonClickHandler = (e) => {
     setDisplayValue(displayValue === "d-none" ? "d-block" : "d-none");
     setClassStateDD(
-      `dropdown bg-white rounded overflow-hidden d-flex flex-column ${displayValue}`
+      `dropdown shadow bg-white rounded overflow-hidden d-flex flex-column ${displayValue}`
     );
 
     // console.log(classStateDD);
@@ -33,12 +40,30 @@ const NavigationBar = () => {
     logout();
   };
 
+  const toggleThemeHandler = () => {
+    if (theme) {
+      console.log("light");
+      setTheme(false);
+    } else {
+      console.log("dark");
+      setTheme(true);
+    }
+  };
+
   return (
-    <div className="container-fluid mx-0 bg_cream_orange_01">
+    <div
+      className={`container-fluid mx-0 ${
+        theme ? "bg-dark-secondary" : "bg_cream_orange_01"
+      }`}
+    >
       <nav className="container navbar navbar-expand-lg py-4">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
-            <h4 className="fw-bolder pacifico-font">
+            <h4
+              className={`fw-bolder pacifico-font ${
+                theme ? "text-white" : "text-dark"
+              }`}
+            >
               Chefista<span className="theme-color">.</span>
             </h4>
           </Link>
@@ -51,7 +76,11 @@ const NavigationBar = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span className="navbar-toggler-icon"></span>
+            <span
+              className={`fs-hamburger ${theme ? "color-white" : "gray-02"}`}
+            >
+              <FaBars />
+            </span>
           </button>
           <div
             className="collapse navbar-collapse justify-content"
@@ -61,18 +90,20 @@ const NavigationBar = () => {
               <div className="balancer"></div>
 
               <div className="links d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center gap-4 py-5 py-lg-0">
-                <ActiveLink to="/" classes="gray-01 fs-14 text-decoration-none">
+                <ActiveLink
+                  to="/"
+                  classes={`fs-14 text-decoration-none  ${
+                    theme ? "text-white" : "gray-01"
+                  }`}
+                >
                   Home
                 </ActiveLink>
-                {/* <ActiveLink
-                  to="/chef-recipes/1"
-                  classes="gray-01 fs-14 text-decoration-none"
-                >
-                  Chef Recipes
-                </ActiveLink> */}
+
                 <ActiveLink
                   to="/blogs"
-                  classes="gray-01 fs-14 text-decoration-none"
+                  classes={`fs-14 text-decoration-none  ${
+                    theme ? "text-white" : "gray-01"
+                  }`}
                 >
                   Blogs
                 </ActiveLink>
@@ -91,7 +122,9 @@ const NavigationBar = () => {
                         src={user.photoURL}
                         className="user-image-nav rounded-circle"
                       />
-                      <FaCaretDown />
+                      <span className={`${theme ? "color-white" : ""}`}>
+                        <FaCaretDown />
+                      </span>
                     </button>
 
                     <ReactTooltip
@@ -102,10 +135,42 @@ const NavigationBar = () => {
 
                     {/* dropdown */}
                     <div className={classStateDD}>
+                      <button className="py-2 px-4 dropdown-button d-flex justify-content-between align-items-center bg-transparent border-0 border-bottom">
+                        <span className="theme-color">
+                          <FaUserCog />
+                        </span>
+                        View Profile
+                      </button>
+                      <button className="py-2 px-4 dropdown-button d-flex justify-content-between align-items-center bg-transparent border-0 border-bottom">
+                        <span className="theme-color">
+                          <FaBookmark />
+                        </span>
+                        Favorites
+                      </button>
+                      <button className="py-2 px-4 dropdown-button d-flex justify-content-between align-items-center bg-transparent border-0 border-bottom">
+                        <span className="theme-color">
+                          <FaAffiliatetheme />
+                        </span>
+
+                        <div className="form-check form-switch mx-0 px-0">
+                          <input
+                            className="form-check-input mx-0 px-0"
+                            type="checkbox"
+                            role="switch"
+                            id="flexSwitchCheckChecked"
+                            onChange={toggleThemeHandler}
+                            // unchecked
+                          />
+                        </div>
+                      </button>
+                      {/*  */}
                       <button
-                        className="py-2 bg-transparent border-0 border-bottom"
+                        className="py-2 px-4 dropdown-button d-flex justify-content-between align-items-center bg-transparent border-0 border-bottom"
                         onClick={logoutHandler}
                       >
+                        <span className="theme-color">
+                          <FaSignOutAlt />
+                        </span>
                         Sign Out
                       </button>
                     </div>

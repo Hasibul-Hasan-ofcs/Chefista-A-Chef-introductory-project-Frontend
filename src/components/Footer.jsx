@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { FaFacebook } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaDribbble } from "react-icons/fa";
+import { AuthContext } from "../providers/AuthProvider";
 
 const Footer = () => {
+  const { user } = useContext(AuthContext);
   return (
     <div className="bg-dark-01">
       <div className="container py-5 mx-auto">
@@ -29,14 +31,14 @@ const Footer = () => {
                 About Us
               </a>
               <a href="" className="gray-02 fs-14 text-decoration-none">
-                Work
-              </a>
-              <a href="" className="gray-02 fs-14 text-decoration-none">
                 Latest News
               </a>
-              <a href="" className="gray-02 fs-14 text-decoration-none">
-                Careers
-              </a>
+              <Link to="/login" className="gray-02 fs-14 text-decoration-none">
+                Login
+              </Link>
+              <Link to="/signup" className="gray-02 fs-14 text-decoration-none">
+                Sign Up
+              </Link>
             </div>
           </div>
           <div className="col-12 col-md-6 col-lg-2 px-2 px-lg-0 pb-5 pb-lg-0">

@@ -3,13 +3,16 @@ import "./../css/chefRecipes.css";
 import { useLoaderData } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
 
 const ChefRecipes = () => {
   const [recipes, setRecipes] = useState([]);
   const [disabledState, setDisabledState] = useState({});
   const loader = useLoaderData();
 
-  console.log(recipes);
+  const { theme } = useContext(AuthContext);
+  // console.log(recipes);
 
   useEffect(() => {
     fetch(`https://chefista-backend.vercel.app/recipes/${loader._id}`)
@@ -61,42 +64,47 @@ const ChefRecipes = () => {
       </div>
 
       {/* recipes */}
-      <div className="container mx-auto py-5">
-        <h2 className="text-center fw-bolder py-5">
-          <span className="theme-color pacifico-font">Chef's</span> Recipes
-        </h2>
-        {recipes.map((elm, indx) => {
-          return (
-            <div
-              className="rounded shadow p-4 d-flex flex-column my-5"
-              key={indx}
-            >
-              <img src={elm.img} className="recipe-img rounded my-4" />
-              <p>
-                <b>Recipe Name:</b> {elm.name}
-              </p>
-              <p>
-                <b>Ingredients :</b> {elm.ingredients.join(", ")}
-              </p>
-              <p>
-                <b>Cooking Method:</b> {elm.cooking_method}
-              </p>
-              <p>
-                <b>Rating:</b> {elm.rating}
-              </p>
-              <div className="button-box ">
-                <button
-                  className={`theme-button rounded border-0 px-3 py-1 fw-bold`}
-                  onClick={addFevHandler}
-                >
-                  Add to Favorites
-                </button>
+      <div className={`container-fluid py-5 ${theme ? "bg-dark-primary" : ""}`}>
+        <div className="container mx-auto">
+          <h2 className="text-center fw-bolder py-5">
+            <span className="theme-color pacifico-font">Chef's</span>{" "}
+            <span className={`${theme ? "text-white" : ""}`}>Recipes</span>
+          </h2>
+          {recipes.map((elm, indx) => {
+            return (
+              <div
+                className={`rounded shadow p-4 d-flex flex-column my-5 ${
+                  theme ? "bg-dark-secondary" : ""
+                }`}
+                key={indx}
+              >
+                <img src={elm.img} className="recipe-img rounded my-4" />
+                <p className={`${theme ? "text-white" : ""}`}>
+                  <b>Recipe Name:</b> {elm.name}
+                </p>
+                <p className={`${theme ? "text-white" : ""}`}>
+                  <b>Ingredients:</b> {elm.ingredients.join(", ")}
+                </p>
+                <p className={`${theme ? "text-white" : ""}`}>
+                  <b>Cooking Method:</b> {elm.cooking_method}
+                </p>
+                <p className={`${theme ? "text-white" : ""}`}>
+                  <b>Rating:</b> {elm.rating}
+                </p>
+                <div className="button-box ">
+                  <button
+                    className={`theme-button rounded border-0 px-3 py-1 fw-bold`}
+                    onClick={addFevHandler}
+                  >
+                    Add to Favorites
+                  </button>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
+        <ToastContainer />
       </div>
-      <ToastContainer />
     </div>
   );
 };

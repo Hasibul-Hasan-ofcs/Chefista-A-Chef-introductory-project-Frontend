@@ -8,8 +8,14 @@
 }
 
 .recipe-img {
-  height: 200px;
-  width: 200px;
+  /* height: 300px; */
+  width: 250px;
+}
+
+@media (max-width: 300px) {
+  .recipe-img {
+    width: 100%;
+  }
 }
 
 .disabled-btn {
