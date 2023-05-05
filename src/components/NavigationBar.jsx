@@ -14,9 +14,12 @@ import {
 
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
+import { maskEmail } from "../js/maskEmail";
 
 const NavigationBar = () => {
   const { user, logout, theme, setTheme } = useContext(AuthContext);
+
+  console.log(user);
 
   const [displayValue, setDisplayValue] = useState("d-none");
   const [classStateDD, setClassStateDD] = useState(
@@ -55,6 +58,7 @@ const NavigationBar = () => {
       className={`container-fluid mx-0 ${
         theme ? "bg-dark-secondary" : "bg_cream_orange_01"
       }`}
+      id="top"
     >
       <nav className="container navbar navbar-expand-lg py-4">
         <div className="container-fluid">
@@ -120,7 +124,7 @@ const NavigationBar = () => {
                     >
                       <img
                         src={user.photoURL}
-                        className="user-image-nav rounded-circle"
+                        className="user-image-nav rounded-circle theme-border2"
                       />
                       <span className={`${theme ? "color-white" : ""}`}>
                         <FaCaretDown />
@@ -129,13 +133,25 @@ const NavigationBar = () => {
 
                     <ReactTooltip
                       anchorId="app-title"
-                      place="bottom"
+                      place="left"
                       content={user.displayName}
                     />
 
                     {/* dropdown */}
                     <div className={classStateDD}>
-                      <button className="py-2 px-4 dropdown-button d-flex justify-content-between align-items-center bg-transparent border-0 border-bottom">
+                      <div className="d-flex flex-column gap-2 pt-3">
+                        <span className="d-flex justify-content-start px-3">
+                          <img
+                            src={user.photoURL}
+                            className="user-image-nav rounded-circle theme-border2"
+                          />
+                        </span>
+                        <span className="border-bottom pb-3 px-3">
+                          {maskEmail(user.email)}
+                        </span>
+                      </div>
+
+                      {/* <button className="py-2 px-4 dropdown-button d-flex justify-content-between align-items-center bg-transparent border-0 border-bottom">
                         <span className="theme-color">
                           <FaUserCog />
                         </span>
@@ -146,13 +162,16 @@ const NavigationBar = () => {
                           <FaBookmark />
                         </span>
                         Favorites
-                      </button>
+                      </button> */}
                       <button className="py-2 px-4 dropdown-button d-flex justify-content-between align-items-center bg-transparent border-0 border-bottom">
                         <span className="theme-color">
                           <FaAffiliatetheme />
                         </span>
 
-                        <div className="form-check form-switch mx-0 px-0">
+                        <div
+                          className="form-check form-switch mx-0 px-0"
+                          id="theme-id"
+                        >
                           <input
                             className="form-check-input mx-0 px-0"
                             type="checkbox"
@@ -162,6 +181,11 @@ const NavigationBar = () => {
                             // unchecked
                           />
                         </div>
+                        <ReactTooltip
+                          anchorId="theme-id"
+                          place="left"
+                          content="Change theme"
+                        />
                       </button>
                       {/*  */}
                       <button

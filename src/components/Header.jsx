@@ -18,7 +18,8 @@ const Header = () => {
             <span className="text-1-header">The Culinary</span>
             <span className="text-2-header">Genius of Innovative</span>
             <span className="theme-color text-3-header pacifico-font">
-              Chefs
+              {/* Chefs */}
+              シェフ
             </span>
           </h1>
           <p className="gray-01 fs-14 text-center text-lg-start header-info-text">

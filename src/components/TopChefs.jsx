@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import LazyLoad from "react-lazy-load";
 import { AuthContext } from "../providers/AuthProvider";
+import { HashLink } from "react-router-hash-link";
+import { IoFastFoodSharp, IoThumbsUp, IoToday } from "react-icons/io5";
 
 const TopChefs = ({ loader }) => {
   const { theme } = useContext(AuthContext);
@@ -55,7 +57,9 @@ const TopChefs = ({ loader }) => {
                         theme ? "text-white" : ""
                       }`}
                     >
-                      <span>No of recipes:</span>{" "}
+                      <span>
+                        <IoFastFoodSharp /> No of recipes:
+                      </span>{" "}
                       <span>{elm.num_of_recipes}</span>
                     </span>
                     <span
@@ -63,7 +67,9 @@ const TopChefs = ({ loader }) => {
                         theme ? "text-white" : ""
                       }`}
                     >
-                      <span>Years of experience:</span>{" "}
+                      <span>
+                        <IoToday /> Years of experience:
+                      </span>{" "}
                       <span>{elm.years_of_experience}</span>
                     </span>
                     <span
@@ -71,17 +77,20 @@ const TopChefs = ({ loader }) => {
                         theme ? "text-white" : ""
                       }`}
                     >
-                      <span>Total Likes:</span> <span>{elm.likes}</span>
+                      <span>
+                        <IoThumbsUp /> Total Likes:
+                      </span>{" "}
+                      <span>{elm.likes}</span>
                     </span>
                   </div>
 
                   <div className="button-box ">
-                    <Link to={`/chef-recipes/${elm._id}`}>
+                    <HashLink smooth to={`/chef-recipes/${elm._id}#top`}>
                       {" "}
                       <button className="theme-button rounded border-0 px-3 py-1 fw-bold">
                         View Recipes
                       </button>
-                    </Link>
+                    </HashLink>
                   </div>
                 </div>
               </div>

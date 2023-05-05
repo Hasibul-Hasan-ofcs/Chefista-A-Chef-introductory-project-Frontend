@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import SectionImg from "./../assets/Images/sec_i01.jpg";
+import SectionImg from "./../assets/Images/sec_i01.png";
 import { AuthContext } from "../providers/AuthProvider";
 
 const ChefSpecialities = () => {

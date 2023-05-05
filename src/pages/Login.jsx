@@ -8,7 +8,7 @@ import BannerChef2 from "./../assets/Images/chef_banner_2.jpeg";
 
 const Login = () => {
   const [errorState, setErrorState] = useState(null);
-  const { login, googlePopUpSignIn, githubPopUpSignIn } =
+  const { login, googlePopUpSignIn, githubPopUpSignIn, theme } =
     useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -51,20 +51,24 @@ const Login = () => {
   };
 
   return (
-    <div className="container-fluid py-5 bg_cream_orange_01">
+    <div
+      className={`container-fluid py-5 ${
+        theme ? "bg-dark-secondary" : "bg_cream_orange_01"
+      }`}
+    >
       <div className="container mx-auto d-flex flex-column flex-lg-row gap-3 gap-lg-0">
         <div className="w-100 w-lg-50 mx-auto py-5">
           <img className="img-fluid" src={BannerChef2} />
           <p className="text-warning">
             <HiOutlineInformationCircle /> Please note.
           </p>
-          <div className="form-text">
+          <div className="form-text text-warning">
             We'll never share your email with anyone else. As because in
             Chefista, your security is our highest priority.
           </div>
         </div>
         <div className="form w-100 w-lg-50 p-1 p-lg-4 mx-auto">
-          <div className="rounded-2 shadow p-5 d-flex flex-column gap-3 flex-grow-1 border">
+          <div className="bg_cream_orange_01 rounded-2 shadow p-5 d-flex flex-column gap-3 flex-grow-1 border">
             {/* <h4 className="pb-4">LOGIN</h4> */}
             {errorState && (
               <h5 className="text-danger fw-bold text-center">{errorState}</h5>

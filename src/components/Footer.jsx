@@ -5,9 +5,24 @@ import { FaYoutube } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaDribbble } from "react-icons/fa";
 import { AuthContext } from "../providers/AuthProvider";
+import { HashLink } from "react-router-hash-link";
+import { ToastContainer, toast } from "react-toastify";
 
 const Footer = () => {
   const { user } = useContext(AuthContext);
+
+  const loggedInHandler = (e) => {
+    toast.warning("You are already logged in", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
   return (
     <div className="bg-dark-01">
       <div className="container py-5 mx-auto">
@@ -33,12 +48,38 @@ const Footer = () => {
               <a href="" className="gray-02 fs-14 text-decoration-none">
                 Latest News
               </a>
-              <Link to="/login" className="gray-02 fs-14 text-decoration-none">
-                Login
-              </Link>
-              <Link to="/signup" className="gray-02 fs-14 text-decoration-none">
-                Sign Up
-              </Link>
+              {user ? (
+                <HashLink
+                  to="/#top"
+                  className="gray-02 fs-14 text-decoration-none"
+                  onClick={loggedInHandler}
+                >
+                  Login
+                </HashLink>
+              ) : (
+                <HashLink
+                  to="/login#top"
+                  className="gray-02 fs-14 text-decoration-none"
+                >
+                  Login
+                </HashLink>
+              )}
+              {user ? (
+                <HashLink
+                  to="/#top"
+                  className="gray-02 fs-14 text-decoration-none"
+                  onClick={loggedInHandler}
+                >
+                  Sign Up
+                </HashLink>
+              ) : (
+                <HashLink
+                  to="/signup#top"
+                  className="gray-02 fs-14 text-decoration-none"
+                >
+                  Sign Up
+                </HashLink>
+              )}
             </div>
           </div>
           <div className="col-12 col-md-6 col-lg-2 px-2 px-lg-0 pb-5 pb-lg-0">
@@ -96,6 +137,7 @@ const Footer = () => {
           </p>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

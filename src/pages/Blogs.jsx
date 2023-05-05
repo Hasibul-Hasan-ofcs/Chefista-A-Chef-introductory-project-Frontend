@@ -1,9 +1,13 @@
 import React from "react";
+import { useContext } from "react";
 import Pdf from "react-to-pdf";
+import { AuthContext } from "../providers/AuthProvider";
 
 const ref = React.createRef();
 
 const Blogs = () => {
+  const { theme } = useContext(AuthContext);
+
   const questions = {
     first:
       "Tell us the differences between uncontrolled and controlled components.",
@@ -24,8 +28,8 @@ const Blogs = () => {
   };
 
   return (
-    <div className="">
-      <h1 className="text-center py-5">Blogs</h1>
+    <div className={`${theme ? "bg-dark-secondary" : "bg_cream_orange_01"}`}>
+      <h1 className="text-center py-5 theme-color pacifico-font">Blogs</h1>
       <div className="container mx-auto d-flex align-items-center justify-content-center">
         <Pdf targetRef={ref} filename="code-example.pdf">
           {({ toPdf }) => (
@@ -37,7 +41,7 @@ const Blogs = () => {
       </div>
 
       <div className="container py-5 d-flex flex-column gap-3" ref={ref}>
-        <div className="qnaCard rounded border p-3">
+        <div className="qnaCard bg-white rounded border p-3">
           <h3 className="d-flex align-items-center flex-wrap gap-3">
             <span className="theme-color fw-bolder">Question : </span>
             <p className="py-0 my-0">{questions.first}</p>
@@ -51,7 +55,7 @@ const Blogs = () => {
           </p>
         </div>
 
-        <div className="qnaCard rounded border p-3">
+        <div className="qnaCard bg-white rounded border p-3">
           <h3 className="d-flex align-items-center flex-wrap gap-3">
             <span className="theme-color fw-bolder">Question : </span>
             <p className="py-0 my-0">{questions.second}</p>
@@ -64,7 +68,7 @@ const Blogs = () => {
             &nbsp;{answers.second}
           </p>
         </div>
-        <div className="qnaCard rounded border p-3">
+        <div className="qnaCard bg-white rounded border p-3">
           <h3 className="d-flex align-items-center flex-wrap gap-3">
             <span className="theme-color fw-bolder">Question : </span>
             <p className="py-0 my-0">{questions.third}</p>
@@ -77,7 +81,7 @@ const Blogs = () => {
             &nbsp;{answers.third}
           </p>
         </div>
-        <div className="qnaCard rounded border p-3">
+        <div className="qnaCard bg-white rounded border p-3">
           <h3 className="d-flex align-items-center flex-wrap gap-3">
             <span className="theme-color fw-bolder">Question : </span>
             <p className="py-0 my-0">{questions.fourth}</p>
