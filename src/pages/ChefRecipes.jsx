@@ -12,9 +12,7 @@ const ChefRecipes = () => {
   console.log(recipes);
 
   useEffect(() => {
-    fetch(
-      `https://chefista-backend-2u589g96u-hasibul-hasan-ofcs.vercel.app/recipes/${loader._id}`
-    )
+    fetch(`https://chefista-backend.vercel.app/recipes/${loader._id}`)
       .then((result) => result.json())
       .then((data) => setRecipes(data))
       .catch((err) => console.log(err));
