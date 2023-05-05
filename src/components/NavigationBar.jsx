@@ -45,7 +45,7 @@ const NavigationBar = () => {
 
   const toggleThemeHandler = () => {
     if (theme) {
-      console.log("light");
+      console.log("lite");
       setTheme(false);
     } else {
       console.log("dark");
@@ -184,7 +184,7 @@ const NavigationBar = () => {
                         <ReactTooltip
                           anchorId="theme-id"
                           place="left"
-                          content="Change theme"
+                          content={theme ? "Theme [dark]" : "Theme [lite]"}
                         />
                       </button>
                       {/*  */}
