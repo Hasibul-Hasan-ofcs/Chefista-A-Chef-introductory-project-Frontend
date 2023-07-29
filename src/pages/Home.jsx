@@ -6,9 +6,12 @@ import TopChefs from "../components/TopChefs";
 import Sponsors from "../components/Sponsors";
 import ChefSpecialities from "../components/ChefSpecialities";
 import FamousCuisins from "../components/FamousCuisins";
+import dynamicAppTitle from "../js/dynamicAppTitle";
 
 const Home = () => {
   const loader = useLoaderData();
+
+  dynamicAppTitle("Home");
 
   return (
     <>

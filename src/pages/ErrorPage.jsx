@@ -2,8 +2,11 @@ import React from "react";
 // import IMG404 from "./../assets/All Images/404_error.png";
 import { Link } from "react-router-dom";
 import BannerChef2 from "./../assets/Images/chef_banner_2.jpeg";
+import dynamicAppTitle from "../js/dynamicAppTitle";
 
 const ErrorPage = () => {
+  dynamicAppTitle("Page Not Found!");
+
   return (
     <div className="container min-vh-100 flex-column d-flex align-items-center justify-content-center py-5">
       <div className="container-fluid d-flex align-items-center justify-content-center flex-column">

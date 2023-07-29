@@ -1,11 +1,18 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
 import LazyLoad from "react-lazy-load";
 import { AuthContext } from "../providers/AuthProvider";
 import { HashLink } from "react-router-hash-link";
 import { IoFastFoodSharp, IoThumbsUp, IoToday } from "react-icons/io5";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const TopChefs = ({ loader }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const handleImgLoad = () => {
+    setIsLoaded(true);
+  };
+
   const { theme } = useContext(AuthContext);
   const { chefs } = loader;
   // console.log(chefs);
@@ -33,14 +40,26 @@ const TopChefs = ({ loader }) => {
                     theme ? "bg-dark-secondary" : ""
                   }`}
                 >
-                  <LazyLoad>
-                    <img
-                      // src={japaneseChef01}
-                      src={elm.picture}
-                      className="pb-4 img-fluid rounded"
-                    />
-                  </LazyLoad>
-
+                  <div className="aspect1b1 w-100 position-relative">
+                    {isLoaded || (
+                      <div className="aspect1b1 w-100 position-absolute top-0 start-0">
+                        <Skeleton
+                          // width={"100%"}
+                          height={"100%"}
+                          isLoading={true}
+                        />
+                      </div>
+                    )}
+                    <LazyLoad>
+                      <img
+                        // src={japaneseChef01}
+                        src={elm.picture}
+                        className="mb-4 img-fluid rounded aspect1b1 w-100 position-absolute top-0 start-0"
+                        onLoad={handleImgLoad}
+                        // style={{ width: "100%" }}
+                      />
+                    </LazyLoad>
+                  </div>
                   <h5
                     className={`fw-bolder dark-01 py-3 ${
                       theme ? "theme-color" : ""

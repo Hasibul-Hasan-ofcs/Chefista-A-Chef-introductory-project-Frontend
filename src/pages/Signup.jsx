@@ -1,15 +1,22 @@
 import React, { useContext, useEffect, useState } from "react";
 import { HiOutlineInformationCircle } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import BannerChef2 from "./../assets/Images/chef_banner_2.jpeg";
+import dynamicAppTitle from "../js/dynamicAppTitle";
+import { Spinner } from "react-bootstrap";
 
 const Signup = () => {
-  const { createUser, updateUser, theme } = useContext(AuthContext);
+  const { createUser, updateUser, theme, loading, setLoading } =
+    useContext(AuthContext);
   const [upProfile, setUpProfile] = useState(false);
   const [nameState, setNameState] = useState("");
   const [photoState, setPhotoState] = useState("");
   const [errorState, setErrorState] = useState(null);
+
+  const navigate = useNavigate();
+
+  dynamicAppTitle("Signup");
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
@@ -48,7 +55,11 @@ const Signup = () => {
       setUpProfile(!upProfile);
     } else {
       updateUser(nameState, photoState)
-        .then((userCredential) => console.log(userCredential))
+        .then((userCredential) => {
+          console.log(userCredential);
+          setLoading(false);
+          navigate("/#top");
+        })
         .catch((err) => console.error(err));
     }
   }, [nameState]);
@@ -122,7 +133,7 @@ const Signup = () => {
                 />
                 <label htmlFor="floatingPhoto">Photo URL</label>
               </div>
-              {/* <div className="mb-3 form-check">
+              <div className="mb-3 form-check">
                 <input
                   type="checkbox"
                   className="form-check-input"
@@ -130,18 +141,22 @@ const Signup = () => {
                 />
                 <label className="form-check-label" htmlFor="exampleCheck1">
                   By accepting this I agree to the{" "}
-                  <span className="fw-bold text-decoration-none theme-color">
+                  <button className="fw-bold text-decoration-none theme-color d-inline">
                     Terms and Conditions
-                  </span>
+                  </button>
                 </label>
-              </div> */}
+              </div>
 
               <button
                 type="submit"
                 // className="theme-button rounded border-0 px-3 py-2 fw-bold w-100 my-3"
                 className="theme-button rounded border-0 px-3 py-2 fw-bold w-100 my-3"
               >
-                Sign Up
+                {loading ? (
+                  <Spinner animation="border" variant="light" size="sm" />
+                ) : (
+                  <span>Sign Up</span>
+                )}
               </button>
 
               <div className="py-2">

@@ -8,6 +8,7 @@ import App from "./App";
 import Blogs from "./pages/Blogs";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import AboutUs from "./pages/AboutUs";
 import AuthProvider from "./providers/AuthProvider";
 import { allChefsListFetch, findChefLoader } from "./js/jsonLoader";
 import ChefRecipes from "./pages/ChefRecipes";
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <Signup></Signup>,
+      },
+      {
+        path: "/aboutus",
+        element: <AboutUs></AboutUs>,
       },
     ],
   },

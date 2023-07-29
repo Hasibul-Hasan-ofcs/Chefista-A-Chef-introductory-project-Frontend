@@ -5,13 +5,16 @@ import { FaGithub, FaGoogle } from "react-icons/fa";
 import { HiOutlineInformationCircle } from "react-icons/hi";
 import { AuthContext } from "../providers/AuthProvider";
 import BannerChef2 from "./../assets/Images/chef_banner_2.jpeg";
+import dynamicAppTitle from "../js/dynamicAppTitle";
+import { Spinner } from "react-bootstrap";
 
 const Login = () => {
   const [errorState, setErrorState] = useState(null);
-  const { login, googlePopUpSignIn, githubPopUpSignIn, theme } =
+  const { login, googlePopUpSignIn, githubPopUpSignIn, theme, loading } =
     useContext(AuthContext);
 
   const navigate = useNavigate();
+  dynamicAppTitle("Login");
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
@@ -117,7 +120,11 @@ const Login = () => {
                 // className="theme-button rounded border-0 px-3 py-2 fw-bold w-100 my-3"
                 className="theme-button rounded border-0 px-3 py-2 fw-bold w-100 my-3"
               >
-                Sign In
+                {loading ? (
+                  <Spinner animation="border" variant="light" size="sm" />
+                ) : (
+                  <span>Sign In</span>
+                )}
               </button>
 
               <div className="py-2">

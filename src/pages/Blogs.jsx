@@ -2,11 +2,14 @@ import React from "react";
 import { useContext } from "react";
 import Pdf from "react-to-pdf";
 import { AuthContext } from "../providers/AuthProvider";
+import dynamicAppTitle from "../js/dynamicAppTitle";
 
 const ref = React.createRef();
 
 const Blogs = () => {
   const { theme } = useContext(AuthContext);
+
+  dynamicAppTitle("Blogs");
 
   const questions = {
     first:
@@ -31,7 +34,11 @@ const Blogs = () => {
     <div className={`${theme ? "bg-dark-secondary" : "bg_cream_orange_01"}`}>
       <h1 className="text-center py-5 theme-color pacifico-font">Blogs</h1>
       <div className="container mx-auto d-flex align-items-center justify-content-center">
-        <Pdf targetRef={ref} filename="code-example.pdf">
+        <Pdf
+          targetRef={ref}
+          filename="code-example.pdf"
+          options={{ orientation: "landscape", unit: "in", format: [12, 12] }}
+        >
           {({ toPdf }) => (
             <button className="btn theme-button" onClick={toPdf}>
               Generate Pdf

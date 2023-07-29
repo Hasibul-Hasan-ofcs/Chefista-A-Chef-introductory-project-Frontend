@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
+import dynamicAppTitle from "../js/dynamicAppTitle";
 
 const ChefRecipes = () => {
   const [recipes, setRecipes] = useState([]);
@@ -13,6 +14,8 @@ const ChefRecipes = () => {
 
   const { theme } = useContext(AuthContext);
   // console.log(recipes);
+
+  dynamicAppTitle("Chef Recipes");
 
   useEffect(() => {
     fetch(`https://chefista-backend.vercel.app/recipes/${loader._id}`)

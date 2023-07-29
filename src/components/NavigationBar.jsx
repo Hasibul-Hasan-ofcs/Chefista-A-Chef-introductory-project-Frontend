@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import ActiveLink from "./ActiveLink";
 import { AuthContext } from "../providers/AuthProvider";
@@ -19,7 +19,10 @@ import { maskEmail } from "../js/maskEmail";
 const NavigationBar = () => {
   const { user, logout, theme, setTheme } = useContext(AuthContext);
 
-  console.log(user);
+  // console.log(user);
+
+  const dropDownRef = useRef(null);
+  const profileRef = useRef(null);
 
   const [displayValue, setDisplayValue] = useState("d-none");
   const [classStateDD, setClassStateDD] = useState(
@@ -32,8 +35,30 @@ const NavigationBar = () => {
       `dropdown shadow bg-white rounded overflow-hidden d-flex flex-column ${displayValue}`
     );
 
-    // console.log(classStateDD);
+    console.log(displayValue);
   };
+
+  //******************************************************************/ testing
+  const handleClickOutside = (e) => {
+    if (dropDownRef?.current?.contains(e.target)) {
+      // setDisplayValue("d-block");
+      console.log("inside dropdown");
+    } else {
+      console.log("outside dropdown");
+      // console.log(displayValue);
+      // if (displayValue === "d-block") {
+      // setDisplayValue("d-none");
+      // }
+    }
+    console.log(displayValue);
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    // return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
+
+  //******************************************************************/ testing
 
   useEffect(() => {
     setDisplayValue(displayValue === "d-none" ? "d-block" : "d-none");
@@ -102,7 +127,6 @@ const NavigationBar = () => {
                 >
                   Home
                 </ActiveLink>
-
                 <ActiveLink
                   to="/blogs"
                   classes={`fs-14 text-decoration-none  ${
@@ -110,6 +134,14 @@ const NavigationBar = () => {
                   }`}
                 >
                   Blogs
+                </ActiveLink>
+                <ActiveLink
+                  to="/aboutus"
+                  classes={`fs-14 text-decoration-none  ${
+                    theme ? "text-white" : "gray-01"
+                  }`}
+                >
+                  About Us
                 </ActiveLink>
               </div>
 
@@ -121,6 +153,7 @@ const NavigationBar = () => {
                       className="profile_button border-0 bg-transparent"
                       onClick={profileButtonClickHandler}
                       id="app-title"
+                      ref={profileRef}
                     >
                       <img
                         src={user.photoURL}
@@ -138,7 +171,7 @@ const NavigationBar = () => {
                     />
 
                     {/* dropdown */}
-                    <div className={classStateDD}>
+                    <div className={classStateDD} ref={dropDownRef}>
                       <div className="d-flex flex-column gap-2 pt-3">
                         <span className="d-flex justify-content-start px-3">
                           <img
@@ -147,7 +180,9 @@ const NavigationBar = () => {
                           />
                         </span>
                         <span className="border-bottom pb-3 px-3">
-                          {maskEmail(user.email)}
+                          {user.email
+                            ? maskEmail(user.email)
+                            : user.displayName}
                         </span>
                       </div>
 
